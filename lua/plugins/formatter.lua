@@ -44,6 +44,7 @@ require("formatter").setup({
         rust = { require("formatter.filetypes.rust").rustfmt },
         fish = { require("formatter.filetypes.fish").fishindent },
         python = { require("formatter.filetypes.python").black },
+        sh = { require("formatter.filetypes.sh").shfmt },
         ["*"] = { require("formatter.filetypes.any").remove_trailing_whitespace },
     },
 })
