@@ -9,14 +9,7 @@ local lsp_keys = function(bufopts)
     vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
 end
 
-local on_attach = function(_, bufnr)
-    vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-
-    local opts = { noremap = true, silend = true }
-    local bufopts = { table.unpack(opts), buffer = bufnr }
-
-    lsp_keys(bufopts)
-
+local lsp_keys_wichkey = function(whichkey_opts, whichkey_bufopts)
     local which_key = require "which-key"
 
     which_key.register({
@@ -24,7 +17,7 @@ local on_attach = function(_, bufnr)
             name = "+lsp",
             g = { name = "+goto", p = { vim.lsp.buf.goto_prev, "prev" }, n = { vim.lsp.buf.goto_next, "next" } },
         },
-    }, { noremap = true, silent = true, prefix = "<leader>" })
+    }, whichkey_opts)
 
     which_key.register({
         l = {
@@ -59,7 +52,21 @@ local on_attach = function(_, bufnr)
                 },
             },
         },
-    }, { noremap = true, silent = true, buffer = bufnr, prefix = "<leader>" })
+    }, whichkey_bufopts)
+end
+
+local on_attach = function(_, bufnr)
+    vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+
+    local opts = { noremap = true, silend = true }
+    local bufopts = { table.unpack(opts), buffer = bufnr }
+
+    lsp_keys(bufopts)
+
+    local whichkey_opts = { table.unpack(opts), prefix = "<leader>" }
+    local whichkey_bufopts = { table.unpack(bufopts), prefix = "<leader>" }
+
+    lsp_keys_wichkey(whichkey_opts, whichkey_bufopts)
 end
 
 local lsp_flags = { debounce_text_changes = 150 }
