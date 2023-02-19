@@ -41,9 +41,10 @@ packer.startup(function(use)
 
     use({
         "neovim/nvim-lspconfig",
-        requires = { "folke/neodev.nvim" },
+        requires = { "folke/neodev.nvim", "simrat39/rust-tools.nvim" },
         config = function()
             require("plugins.lsp")
+            require("plugins.rust")
         end,
     })
 
@@ -61,14 +62,6 @@ packer.startup(function(use)
         },
         config = function()
             require("plugins.cmp")
-        end,
-    })
-
-    use({
-        "simrat39/rust-tools.nvim",
-        requires = { "neovim/nvim-lspconfig" },
-        config = function()
-            require("plugins.rust")
         end,
     })
 

@@ -55,7 +55,7 @@ local lsp_keys_wichkey = function(whichkey_opts, whichkey_bufopts)
     }, whichkey_bufopts)
 end
 
-local on_attach = function(_, bufnr)
+LSP_ON_ATTACH = function(_, bufnr)
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
     local opts = { noremap = true, silend = true }
@@ -69,22 +69,22 @@ local on_attach = function(_, bufnr)
     lsp_keys_wichkey(whichkey_opts, whichkey_bufopts)
 end
 
-local lsp_flags = { debounce_text_changes = 150 }
+LSP_FLAGS = function()
+    return { debounce_text_changes = 150 }
+end
 
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
--- RUST
-
-lspconfig.rust_analyzer.setup({ on_attach = on_attach, flags = lsp_flags, capabilities = capabilities })
+LSP_CAPABILITIES = function()
+    return require("cmp_nvim_lsp").default_capabilities()
+end
 
 -- LUA
 
 require("neodev").setup()
 
 lspconfig.lua_ls.setup({
-    on_attach = on_attach,
-    flags = lsp_flags,
-    capabilities = capabilities,
+    on_attach = LSP_ON_ATTACH(),
+    flags = LSP_FLAGS(),
+    capabilities = LSP_CAPABILITIES(),
     settings = { Lua = { completion = { callSnippet = "Replace" } } },
 })
 
