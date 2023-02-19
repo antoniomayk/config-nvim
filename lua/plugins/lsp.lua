@@ -54,8 +54,6 @@ local lsp_keys_wichkey = function(whichkey_opts, whichkey_bufopts)
 end
 
 LSP_ON_ATTACH = function(_, bufnr)
-    vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-
     local opts = { noremap = true, silent = true }
     local bufopts = { table.unpack(opts), buffer = bufnr }
 
