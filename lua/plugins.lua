@@ -45,6 +45,7 @@ packer.startup(function(use)
         config = function()
             require("plugins.lsp")
             require("plugins.rust")
+            require("plugins.lua")
         end,
     })
 

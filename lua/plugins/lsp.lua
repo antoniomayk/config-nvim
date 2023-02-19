@@ -1,5 +1,3 @@
-local lspconfig = require("lspconfig")
-
 local lsp_keys = function(bufopts)
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
@@ -76,17 +74,6 @@ end
 LSP_CAPABILITIES = function()
     return require("cmp_nvim_lsp").default_capabilities()
 end
-
--- LUA
-
-require("neodev").setup()
-
-lspconfig.lua_ls.setup({
-    on_attach = LSP_ON_ATTACH(),
-    flags = LSP_FLAGS(),
-    capabilities = LSP_CAPABILITIES(),
-    settings = { Lua = { completion = { callSnippet = "Replace" } } },
-})
 
 -- LSP CONFIG
 
