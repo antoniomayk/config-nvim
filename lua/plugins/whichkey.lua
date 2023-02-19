@@ -68,8 +68,8 @@ which_key.register({
         name = "+cursor",
         l = { "wh <c-w>l", "move cursor to the right" },
         h = { "wh <c-w>h", "move cursor to the left" },
-        j = { "wh <c-w>j", "move cursor to the top" },
-        k = { "wh <c-w>k", "move cursor to the bottom" },
+        j = { "wh <c-w>j", "move cursor to the bottom" },
+        k = { "wh <c-w>k", "move cursor to the top" },
     },
     s = { name = "+search", c = { ":nohlsearch<cr>", "clear search" } },
 }, { prefix = "<leader>" })
