@@ -6,9 +6,7 @@ cmp.setup({
             vim.fn["vsnip#anonymous"](args.body)
         end,
     },
-    mapping = {
-        ["<C-p>"] = cmp.mapping.select_prev_item(),
-        ["<C-n>"] = cmp.mapping.select_next_item(),
+    mapping = cmp.mapping.preset.insert({
         ["<S-Tab>"] = cmp.mapping.select_prev_item(),
         ["<Tab>"] = cmp.mapping.select_next_item(),
         ["<C-S-f>"] = cmp.mapping.scroll_docs(-4),
@@ -16,7 +14,7 @@ cmp.setup({
         ["<C-Space>"] = cmp.mapping.complete({}),
         ["<C-e>"] = cmp.mapping.close(),
         ["<CR>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = true }),
-    },
+    }),
     sources = {
         { name = "path" },
         { name = "nvim_lsp", keyword_length = 3 },
