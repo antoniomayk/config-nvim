@@ -79,3 +79,23 @@ vim.o["shell"] = "fish"
 -----------------------------------------------------------
 
 vim.env["NVIM_TUI_ENABLE_TRUE_COLOR"] = 1
+
+-----------------------------------------------------------
+--- LSP
+-----------------------------------------------------------
+
+vim.fn.sign_define("DiagnosticSignError", { text = "E ", texthl = "DiagnosticSignError" })
+vim.fn.sign_define("DiagnosticSignHint", { text = "H ", texthl = "DiagnosticSignHint" })
+vim.fn.sign_define("DiagnosticSignInfo", { text = "I ", texthl = "DiagnosticSignInfo" })
+vim.fn.sign_define("DiagnosticSignWarn", { text = "W ", texthl = "DiagnosticSignWarn" })
+
+vim.diagnostic.config({
+    virtual_text = false,
+    signs = true,
+    update_in_insert = true,
+    underline = true,
+    severity_sort = false,
+    float = { border = "single", source = "always", header = "", prefix = "" },
+})
+
+vim.api.nvim_create_autocmd("CursorHold", { command = "lua vim.diagnostic.open_float(nil, { focusable = false })" })
