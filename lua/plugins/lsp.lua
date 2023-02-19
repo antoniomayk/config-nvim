@@ -56,7 +56,7 @@ end
 LSP_ON_ATTACH = function(_, bufnr)
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
-    local opts = { noremap = true, silend = true }
+    local opts = { noremap = true, silent = true }
     local bufopts = { table.unpack(opts), buffer = bufnr }
 
     lsp_keys(bufopts)
